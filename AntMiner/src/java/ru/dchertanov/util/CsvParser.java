@@ -7,7 +7,7 @@ public class CsvParser {
     private CsvParser() {
     }
 
-    public static List<String> getDatasetFeatures(File file) throws IOException {
+    private static List<String> getDatasetFeatures(File file) throws IOException {
         if (!file.exists()) {
             return new ArrayList<>();
         }
@@ -17,7 +17,8 @@ public class CsvParser {
         }
     }
 
-    public static List<DataSample> getDataSamples(File file, List<String> features) throws IOException {
+    public static List<DataSample> getDataSamples(File file) throws IOException {
+        List<String> features = getDatasetFeatures(file);
         List<DataSample> dataSamples = new ArrayList<>();
 
         if (!file.exists()) {

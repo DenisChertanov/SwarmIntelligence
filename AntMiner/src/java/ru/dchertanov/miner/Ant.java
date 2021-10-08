@@ -35,14 +35,6 @@ public class Ant implements Comparable<Ant> {
         return rules;
     }
 
-    public double getProbability() {
-        return probability;
-    }
-
-    public void setProbability(double probability) {
-        this.probability = probability;
-    }
-
     public boolean isWorked() {
         return worked;
     }

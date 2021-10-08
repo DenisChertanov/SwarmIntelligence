@@ -6,14 +6,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Dataset {
-    private final List<String> features;
     private final List<DataSample> dataSamples;
     private final Set<String> featuresValues = new HashSet<>();
     private final Map<String, String> valueToFeature = new HashMap<>();
 
     public Dataset(File file) throws IOException {
-        features = CsvParser.getDatasetFeatures(file);
-        dataSamples = CsvParser.getDataSamples(file, features);
+        dataSamples = CsvParser.getDataSamples(file);
         initializeFeaturesValues();
     }
 
@@ -40,14 +38,6 @@ public class Dataset {
                 .stream()
                 .filter(DataSample::isTrueClass)
                 .count() / (double) satisfiesSamples.size();
-    }
-
-    public List<String> getFeatures() {
-        return features;
-    }
-
-    public List<DataSample> getDataSamples() {
-        return dataSamples;
     }
 
     public Set<String> getFeaturesValues() {

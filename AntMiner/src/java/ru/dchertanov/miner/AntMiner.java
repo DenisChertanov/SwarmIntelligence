@@ -46,7 +46,7 @@ public class AntMiner {
                 List<String> newRules = new ArrayList<>(ant.getRules());
                 newRules.add(rule);
 
-                if (newRules.size() == 2 || dataset.getDivisionValue(newRules) > dataset.getDivisionValue(ant.getRules())) {
+                if (newRules.size() == 2 || dataset.getDivisionValue(newRules) > dataset.getDivisionValue(ant.getRules())) { // check if new rule improve answer
                     ant.addRule(rule, dataset.getFeatureFromValue(rule), dataset.getDivisionValue(newRules));
                 } else {
                     ant.finish();
@@ -57,6 +57,7 @@ public class AntMiner {
     }
 
     private String getNextRule(Ant ant) {
+        // count probabilities for all available new rules
         Map<String, Double> edgesMetricValue = new HashMap<>();
         Set<String> newRules = new HashSet<>(ant.getRules());
         dataset.getFeaturesValues()
@@ -72,6 +73,7 @@ public class AntMiner {
                 });
         double metricValueSum = edgesMetricValue.values().stream().mapToDouble(x -> x).sum();
 
+        // find next rule (edge) via probabilities
         double randomValue = random.nextDouble();
         double currentProbability = 1;
         String result = null;
